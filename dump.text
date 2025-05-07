@@ -1,0 +1,82 @@
+<div className="flex flex-col border rounded-md w-full px-4 py-4">
+                <div className="flex justify-between items-center mb-2 pb-2 border-b">
+                  <div className="font-semibold text-xl truncate">Weekly Goals – May Week 1</div>
+                  <div className="hover:text-blue-800 hover:bg-blue-100 rounded-full p-1 cursor-pointer"><Pin size={20}/></div>
+                </div>
+                <div className="text-sm text-muted-foreground">Updated May 7, 2025, 09:23 PM</div>
+                <div className="content line-clamp-4 my-4 min-h-[6rem]">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae ratione molestiae cumque labore architecto minima ad fugiat necessitatibus, est laborum? Laudantium assumenda ea corporis magni optio tenetur! Sint, harum doloribus.</div>
+                <div className="mb-2 gap-4">
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Javascript
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Nextjs
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />DB
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Backend
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Programming
+                  </Badge>
+                </div>
+                <div className="flex w-full justify-between items-center mb-2">
+                  <div>
+                    <Button className="cursor-pointer hover:bg-green-500/20 hover:text-green-800" variant="outline"><PencilIcon/> Edit</Button>
+                  </div>
+                  <div className="">
+                    <Button className="cursor-pointer hover:bg-red-500/25 hover:text-red-800" variant="outline"><TrashIcon/> Delete</Button>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col border rounded-md w-full px-4 py-4">
+                <div className="flex justify-between items-center mb-2 pb-2 border-b">
+                  <div className="font-semibold text-xl truncate">Weekly Goals – May Week 1</div>
+                  <div className="hover:text-blue-800 hover:bg-blue-100 rounded-full p-1 cursor-pointer"><Pin size={20}/></div>
+                </div>
+                <div className="text-sm text-muted-foreground">Updated May 7, 2025, 09:23 PM</div>
+                <div className="line-clamp-4 my-4 min-h-[6rem]">Displays a badge or a component that looks like a badge.</div>
+                <div className="mb-2 gap-4">
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Javascript
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Nextjs
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />DB
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Backend
+                  </Badge>
+                  <Badge variant="outline" className="text-xs mr-1 mb-1">
+                    <Tag className="h-3 w-3 mr-1" />Programming
+                  </Badge>
+                </div>
+                <div className="flex w-full justify-between items-center mb-2">
+                  <div>
+                    <Button className="cursor-pointer hover:bg-green-500/20 hover:text-green-800" variant="outline"><PencilIcon/> Edit</Button>
+                  </div>
+                  <div className="">
+                    <Button className="cursor-pointer hover:bg-red-500/25 hover:text-red-800" variant="outline"><TrashIcon/> Delete</Button>
+                  </div>
+                </div>
+              </div>
+              <Card className="rounded-md">
+                <CardHeader className="mb-0">
+                  <CardTitle className="text-xl truncate">Weekly Goals – May Week 1</CardTitle>
+                  <CardDescription className="text-xs">Updated May 7, 2025, 09:23 PM</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>Finish Notes Manager MVP Implement folder system Push to GitHub</p>
+                  <div>
+                    <Badge>Javascript</Badge>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex flex-row justify-between items-center">
+                  <Button className="">Edit</Button>
+                  <Button className="" variant="destructive">Delete</Button>
+                </CardFooter>
+              </Card>
