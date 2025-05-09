@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Plus, Search} from "lucide-react";
-import { notes } from "@/lib/data";
+import { notes1 } from "@/lib/data";
 import NoteCard from "@/components/note-card";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
@@ -131,7 +131,7 @@ export default function Home() {
 
           <TabsContent value="notes">
             <div className="grid grid-cols-3 gap-4">
-              {notes.map((note,index)=>(
+              {notes1.map((note,index)=>(
                 <NoteCard onClick={handlePreview} onEdit={handleEdit} onDelete={handleDelete} key={index} title={note.title} description={note.description} content={note.content} tags={note.tags}/>
               ))}
             </div>

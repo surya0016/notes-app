@@ -29,9 +29,11 @@ async function main() {
   // })
   }
 
-  await getAllNote({
+  const {notes} = await getAllNote({
     userId: "075ad37b-b675-4271-9594-a06f11b5a4a9"
   })
+
+  console.log(notes)
 
   // userid1:"075ad37b-b675-4271-9594-a06f11b5a4a9"
   // userid2:"42966a38-0f4e-416a-b7d0-185f51a82e4d"

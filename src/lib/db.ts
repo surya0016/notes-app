@@ -30,7 +30,7 @@ export const createUser = async({name, email, password}:CreateUserProps) => {
       password
     }).returning()
 
-    console.log("USER CREATED SUCCESSFULLY! : -----> ", user)
+    console.log("USER CREATED SUCCESSFULLY! ")
 
     return {
       user: {
@@ -113,7 +113,7 @@ export const createNote = async({
 
 export const getAllNote = async({userId}:{userId:string}) => {
   try {
-
+    //Select notes with joints for a particular user
     const notes = await db
       .select({
         note: NotesTable,
@@ -124,25 +124,39 @@ export const getAllNote = async({userId}:{userId:string}) => {
       .leftJoin(TagsTable, eq(NotesTagsTable.tagId, TagsTable.id))
       .where(eq(NotesTable.userId, userId))
     
-    const groupedNotes:any = {};
+    //Giving type for Fetched notes
+    type FetchedNote = typeof NotesTable.$inferSelect & { tags: typeof TagsTable.$inferSelect[] }
 
-    for (const f_note of notes){
-      const noteId = f_note.note.id
+    //Creating a object to store all the grouped notes
+    //Why grouped notes? the above function will give notes for every tags, 
+    //which means that same notes with different tags will be reapeted 
+    //for ex:
+    // [
+    //   { note: { id: 1, title: "Note A" }, tag: { id: 101, name: "tag1" } },
+    //   { note: { id: 1, title: "Note A" }, tag: { id: 102, name: "tag2" } },
+    //   { note: { id: 2, title: "Note B" }, tag: { id: 103, name: "tag3" } },
+    // ]
+    const groupedNotes: Record<string, FetchedNote> = {};
+
+    //Adding the notes to grouped notes with their note id and creating tags array for every notes
+    for (const row of notes){
+      const noteId = row.note.id
+      //If there is no grouped notes with this id add it and add tags array
       if(!groupedNotes[noteId]){
         groupedNotes[noteId] ={
-          ...f_note.note,
+          ...row.note,
           tags:[]
         }          
       }
-      if(f_note.tag){
-        groupedNotes[noteId].tags.push(f_note.tag)
+      if(row.tag){
+        groupedNotes[noteId].tags.push(row.tag)
       }
     }
 
-    console.log("NOTES: ",groupedNotes)
     return {
-      notes:groupedNotes,
-      message:"NOTES RETREIVED SUCCESSFULLY!"
+      //Returning groupedNotes as an array 
+      notes: Object.values(groupedNotes),
+      message: "..."
     }
   } catch (error) {
     console.log("ERROR [GET_ALL_NOTES_FUNC]", error)
@@ -162,6 +176,6 @@ export const deleteDB = async() => {
 // CREATE USER FUNCTION ✔
 // CREATE NOTE FUNCTION ✔
 // GET ALL NOTE FUNCTION ✔
-// UPDATE NOTE FUNCTION
-// DELETE NOTE FUNCTION
+// UPDATE A NOTE FUNCTION
+// DELETE A NOTE FUNCTION
 // GET A SINGLE NOTE FUNCTION

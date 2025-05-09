@@ -28578,7 +28578,7 @@ var getAllNote = async ({ userId }) => {
       note: NotesTable,
       tag: TagsTable
     }).from(NotesTable).leftJoin(NotesTagsTable, eq(NotesTable.id, NotesTagsTable.noteId)).leftJoin(TagsTable, eq(NotesTagsTable.tagId, TagsTable.id)).where(eq(NotesTable.userId, userId));
-    const groupedNotes = {};
+    const groupedNotes = [];
     for (const f_note of notes) {
       const noteId = f_note.note.id;
       if (!groupedNotes[noteId]) {
@@ -28591,7 +28591,6 @@ var getAllNote = async ({ userId }) => {
         groupedNotes[noteId].tags.push(f_note.tag);
       }
     }
-    console.log("NOTES: ", groupedNotes);
     return {
       notes: groupedNotes,
       message: "NOTES RETREIVED SUCCESSFULLY!"
@@ -28607,8 +28606,9 @@ var getAllNote = async ({ userId }) => {
 // src/lib/seed.ts
 async function main() {
   {}
-  await getAllNote({
+  const { notes } = await getAllNote({
     userId: "075ad37b-b675-4271-9594-a06f11b5a4a9"
   });
+  console.log(notes);
 }
 main();
