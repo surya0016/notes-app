@@ -1,4 +1,4 @@
-export const notes = [
+export const notes1 = [
   {
     title: "Weekly Goals – May Week 1",
     description: "Created May 1, 2025, 09:00 AM",
@@ -28,7 +28,10 @@ export const notes = [
     description: "Created May 4, 2025, 08:30 AM",
     content: "Add pinning, search, folders, dark mode, and offline storage using localForage.",
     tags: ["Ideas", "Features", "NotesApp"]
-  },
+  }
+];
+
+export const notes2 = [
   {
     title: "Git Cheatsheet",
     description: "Created May 4, 2025, 01:20 PM",
@@ -59,4 +62,4 @@ export const notes = [
     content: "Connect GitHub repo to Vercel. Push changes to trigger auto deployment.",
     tags: ["Deployment", "Vercel", "Next.js"]
   }
-];
+]
