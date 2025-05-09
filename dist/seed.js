@@ -28578,22 +28578,22 @@ var getAllNote = async ({ userId }) => {
       note: NotesTable,
       tag: TagsTable
     }).from(NotesTable).leftJoin(NotesTagsTable, eq(NotesTable.id, NotesTagsTable.noteId)).leftJoin(TagsTable, eq(NotesTagsTable.tagId, TagsTable.id)).where(eq(NotesTable.userId, userId));
-    const groupedNotes = [];
-    for (const f_note of notes) {
-      const noteId = f_note.note.id;
+    const groupedNotes = {};
+    for (const row of notes) {
+      const noteId = row.note.id;
       if (!groupedNotes[noteId]) {
         groupedNotes[noteId] = {
-          ...f_note.note,
+          ...row.note,
           tags: []
         };
       }
-      if (f_note.tag) {
-        groupedNotes[noteId].tags.push(f_note.tag);
+      if (row.tag) {
+        groupedNotes[noteId].tags.push(row.tag);
       }
     }
     return {
-      notes: groupedNotes,
-      message: "NOTES RETREIVED SUCCESSFULLY!"
+      notes: Object.values(groupedNotes),
+      message: "..."
     };
   } catch (error) {
     console.log("ERROR [GET_ALL_NOTES_FUNC]", error);
@@ -28609,6 +28609,11 @@ async function main() {
   const { notes } = await getAllNote({
     userId: "075ad37b-b675-4271-9594-a06f11b5a4a9"
   });
-  console.log(notes);
+  notes?.map((note) => {
+    const tags = note.tags;
+    tags.map((tag) => {
+      console.log(tag);
+    });
+  });
 }
 main();

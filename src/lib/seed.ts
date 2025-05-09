@@ -1,9 +1,5 @@
 import 'dotenv/config';
-import { eq } from 'drizzle-orm';
-import { NotesTable, NotesTagsTable, TagsTable, UserTable } from '@/db/schema';
-import { db } from '@/db';
-import { notes2 } from './data';
-import { createNote, createUser, deleteDB, getAllNote } from './db';
+import { getAllNote } from '@/db/queries/note';
 
 async function main() {
   {// const user1 = await createUser({
@@ -33,7 +29,12 @@ async function main() {
     userId: "075ad37b-b675-4271-9594-a06f11b5a4a9"
   })
 
-  console.log(notes)
+  notes?.map((note)=>{
+    const tags = note.tags
+    tags.map((tag)=>{
+      console.log(tag)
+    })
+  })
 
   // userid1:"075ad37b-b675-4271-9594-a06f11b5a4a9"
   // userid2:"42966a38-0f4e-416a-b7d0-185f51a82e4d"
@@ -41,3 +42,10 @@ async function main() {
 }
 
 main();
+
+// CREATE USER FUNCTION ✔
+// CREATE NOTE FUNCTION ✔
+// GET ALL NOTE FUNCTION ✔
+// UPDATE A NOTE FUNCTION
+// DELETE A NOTE FUNCTION
+// GET A SINGLE NOTE FUNCTION

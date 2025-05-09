@@ -1,60 +1,14 @@
 import 'dotenv/config';
-import { NotesTable, NotesTagsTable, TagsTable, UserTable } from '@/db/schema';
+import { NotesTable, NotesTagsTable, TagsTable } from '@/db/schema';
 import { db } from '@/db';
 import { eq, inArray } from 'drizzle-orm';
 
-// check if the user already exists ? user already exists : create a new user
-interface CreateUserProps {
-  name: string,
-  email: string,
-  password: string,
+interface CreateNoteProps {
+  userId: string,
+  title: string,
+  content: string,
+  tags: string[],
 }
-
-export const createUser = async({name, email, password}:CreateUserProps) => {
-  try {
-    const userAlreadyExists = await db.query.UserTable.findFirst({
-      where: ((user, {eq}) => eq(user.email, email))
-    })
-    if(userAlreadyExists){
-      console.log("USER ALREADY EXISTS")
-      return {
-        message: "User already exists"
-      }
-    }
-    
-    const normalizedEmail = email.toLowerCase().trim()
-
-    const user = await db.insert(UserTable).values({
-      name,
-      email:normalizedEmail,
-      password
-    }).returning()
-
-    console.log("USER CREATED SUCCESSFULLY! ")
-
-    return {
-      user: {
-        id: user[0].id,
-        name: user[0].name,
-        email: user[0].email
-      },
-      message: "User created successfully!"
-    }
-  } catch (error) {
-    console.log("ERROR [CREATE_USER]: ", error)
-    return {
-      message: "Server Error [CREATE_USER_FUNC]"
-    }
-  }    
-}
-
-// Add a note to a user with tags 
-  interface CreateNoteProps {
-    userId: string,
-    title: string,
-    content: string,
-    tags: string[],
-  }
 
 export const createNote = async({
   userId,
@@ -165,17 +119,3 @@ export const getAllNote = async({userId}:{userId:string}) => {
     }
   }
 }
-
-export const deleteDB = async() => {
-  await db.delete(NotesTable)
-  await db.delete(UserTable)
-  await db.delete(NotesTagsTable)
-  await db.delete(TagsTable)
-}
-
-// CREATE USER FUNCTION ✔
-// CREATE NOTE FUNCTION ✔
-// GET ALL NOTE FUNCTION ✔
-// UPDATE A NOTE FUNCTION
-// DELETE A NOTE FUNCTION
-// GET A SINGLE NOTE FUNCTION
